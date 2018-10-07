@@ -188,3 +188,22 @@ jQuery(document).ready(function($){
 
     });
 })
+/*------ajax for use search inout -----*/
+jQuery(document).ready(function($){
+    var tempSearchString =[];
+
+    $('#search-input').on('keyup', function(){
+         search_string = $('#search-input').val();
+        console.log(search_string);
+    });
+
+    function ajax_search(){
+       
+console.log(search_string);
+        
+
+        if (selectedTab=='') selectedTab = defaultCategory;
+        updateSlug('', defaultCategory, url, false);//true - reload list of pagination
+    }
+        
+})

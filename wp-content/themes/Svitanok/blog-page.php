@@ -45,7 +45,7 @@ $iterator = 0;
         </nav>
         <?php //get_search_form(); ?>
         <div class="blog-filter-search">
-            <input type="text" placeholder="Що ви бажаєте знайти?" class="blog-filter-search-input" /><button class="blog-filter-search-button"><img src="../../../wp-content/themes/Svitanok/inc/urich/img/shape-gl.png" alt="" ></button>
+            <input id="search-input" type="text" placeholder="Що ви бажаєте знайти?" class="blog-filter-search-input" /><button id="search-button" class="blog-filter-search-button"><img src="../../wp-content/themes/Svitanok/inc/urich/img/shape-gl.png" alt="" ></button>
         </div>
     </div>
     <div class="blog-content">

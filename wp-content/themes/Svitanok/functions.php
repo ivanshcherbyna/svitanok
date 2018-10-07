@@ -410,7 +410,7 @@ function get_same_posts($category, $exclude_post_id, $category_slug=null, $numbe
 }
 add_action('show_same_posts','get_same_posts',10,4);
 
-function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclude_post_id=null )
+function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclude_post_id=null, $searched_string=null)
 {
     $all_posts_args=array(
         'orderby' => 'date',
@@ -438,6 +438,20 @@ function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclud
 
     $args['include']=$pagination;
     $args['numberposts']=$numberposts;
+/*-----from search use -------*/ 
+        // $all_blog_posts = get_posts(array(
+        //     'numberposts' => -1,
+        //     'category_name' => $category_slug,
+        //     'post_status' => 'publish',))
+
+        //$searched_post_ids ='';
+        // if($searched_string!=null){
+        //     $searched_string = sanitize_text_field( $searched_string );
+        //     foreach ($variable as $key => $value) {
+        //         # code...
+        //     }
+        // }
+/*-------------*/
     $posts = get_posts($args);
 
     echo '<input type="hidden" class="all-numbers-posts hidden" value="'.$string_all_post_ids.'" data="'.get_permalink().'"/>';
@@ -504,6 +518,7 @@ function show_same_posts_html($posts){
 
 function get_my_blog($category_slug, $number_pagination=null)
     {
+
         $all_posts_args=array(
             'orderby' => 'date',
             'order' => 'DESC',
@@ -530,6 +545,7 @@ function get_my_blog($category_slug, $number_pagination=null)
 
     $args['include']=$pagination;
     $args['numberposts']=$numberposts;
+
 
     $posts = get_posts($args);
     echo '<input type="hidden" class="all-numbers-posts hidden" value="'.implode( "," ,$all_post_ids).'" data="'.get_permalink().'"/>';
