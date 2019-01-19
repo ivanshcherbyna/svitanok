@@ -30,7 +30,7 @@ $library_list = !empty(redux_post_meta(THEME_OPT, $post,'library-list')) ? redux
 
     <div class="library-list">
         <?php foreach ($library_list as $item): ?>
-        <div class="library-list-item"><a href="<?= $item['library-url'] ?>" class="library-list-item-link"><span class="library-list-item-link-text"><?= $item['library-text'] ?></span><span>&rarr; </span></a></div>
+        <div class="library-list-item"><a target="_blank" href="<?= $item['library-url'] ?>" class="library-list-item-link"><span class="library-list-item-link-text"><?= $item['library-text'] ?></span><span>&rarr; </span></a></div>
         <?php endforeach; ?>
     </div>
 </section>

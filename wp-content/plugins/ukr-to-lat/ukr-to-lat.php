@@ -1,7 +1,7 @@
 <?php
 /**
  * @package Ukr-To-Lat
- * @version 1.2
+ * @version 1.3.1
  */
 /*
 Plugin Name: Ukr-To-Lat
@@ -10,7 +10,7 @@ Plugin URI: https://wordpress.org/plugins/ukr-to-lat/
 Description: Converts Ukrainian characters in post and term slugs to Latin characters. Useful for creating human-readable URLs. Based on the original plugin by Anton Skorobogatov and Cyr-To-Lat by Atrax and SergeyBiryukov.
 Author: Alexander Butyuhin
 Author URI: https://roboteye.biz/
-Version: 1.3
+Version: 1.3.1
 License: GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 */

@@ -38,13 +38,17 @@
             </header>
             <?php if(!is_front_page()): ?>
             <section class="page-subheader">
-                <div class="path wrapper">
-<!--                  --><?//= breadcrumbs(' < ')?>
-                </div>
+
                 <?php // show any class when post from blog cat
-                if (!in_array(5,$post->post_category)):?>
+                if (!empty($post) && !in_array(5,$post->post_category)):?>
+<!--                    <div class="path wrapper">-->
+<!--                   --><?//= breadcrumbs(' < ')?>
+<!--                    </div>-->
                 <h1 class='page-header wrapper'><?php echo get_the_title(); ?></h1>
                 <?php else: ?>
+<!--                    <div class="path wrapper">-->
+<!--                      --><?//= breadcrumbs(' < ')?>
+<!--                    </div>-->
                 <h1 class='page-header-blog wrapper'><?php echo get_the_title(); ?></h1>
                 <?php endif; ?>
             </section>

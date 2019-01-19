@@ -1,9 +1,9 @@
 ﻿=== Ukr-To-Lat ===
 Contributors: BArS, Atrax, SergeyBiryukov, karevn, webvitaly
 Tags: ukrainian, ukrtolat, ukr2lat, cyr2lat, slugs, translations, transliteration, cyrillic
-Requires at least: 2.3
+Requires at least: 4.6
 Tested up to: 4.9.4
-Stable tag: 1.3
+Stable tag: 1.3.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

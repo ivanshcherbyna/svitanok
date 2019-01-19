@@ -27,6 +27,7 @@ $categories_array = get_categories(array(
 $blog_categories_ids = '';
 $number_posts=(isset($_GET['number_pagination']))? $_GET['number_pagination']:null;
 $selected_category=(isset($_GET['data-filter']))? $_GET['data-filter']:$categories_array[0]->cat_ID;
+$search_filter=(isset($_GET['search-filter']))? $_GET['search-filter']:null;
 $iterator = 0;
 
 ?>
@@ -40,16 +41,16 @@ $iterator = 0;
                 if($iterator!=1) $blog_categories_ids .= ',';
                 $blog_categories_ids .= $category->cat_ID;
                 ?>
-            <a href="#" class="filter-tabs-tab" data-filter="<?= $category->cat_ID ?>"><?= $category->name ?></a>
+            <span class="filter-tabs-tab" data-filter="<?= $category->cat_ID ?>"><?= $category->name ?></span>
             <?php endforeach; ?>
         </nav>
         <?php //get_search_form(); ?>
         <div class="blog-filter-search">
-            <input id="search-input" type="text" placeholder="Що ви бажаєте знайти?" class="blog-filter-search-input" /><button id="search-button" class="blog-filter-search-button"><img src="../../wp-content/themes/Svitanok/inc/urich/img/shape-gl.png" alt="" ></button>
+            <input id="search-input" type="search" placeholder="Що ви бажаєте знайти?" class="blog-filter-search-input" /><button id="search-button" class="blog-filter-search-button"><img src="../../wp-content/themes/Svitanok/inc/urich/img/shape-gl.png" alt="" ></button>
         </div>
     </div>
     <div class="blog-content">
-        <?php do_action('show_blog_posts', $selected_category, $number_posts, $blog_categories_ids); ?>
+        <?php do_action('show_blog_posts', $selected_category, $number_posts, $blog_categories_ids,$search_filter); ?>
     </div>
 </section>
 

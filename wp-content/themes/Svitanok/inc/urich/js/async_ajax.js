@@ -1,8 +1,8 @@
 //AJAX social save
 jQuery(document).ready(function ($) {
     var all_buttons = $('.blog_article-sidebar-social-item-link');
-    all_buttons.on('click',function (e) {
-        e.preventDefault();
+    all_buttons.on('click',function () {
+        // e.preventDefault();
          clickedElement = $(this);
          elementForChange = $(this).next('.blog_article-sidebar-social-item-num');
          var post_id = $('#post_id_num').val();
@@ -33,13 +33,13 @@ jQuery(document).ready(function ($) {
 function genetateListOfNumpagination(allpostsList) {
     if(allpostsList==null) {
         allpostsList = jQuery('.all-numbers-posts.hidden').val();
-        console.log('argument without func'+allpostsList);
+        // console.log('argument without func'+allpostsList);
     }
 
     jQuery(document).ready(function ($) {
         var ulElementPagination =  $('.pagination-list');
         ulElementPagination.empty('li');
-        if (allpostsList.length) {
+        if (allpostsList!=null) {
             var result = Array.isArray(allpostsList);
             var array_post_ids;
         if(result == false)
@@ -53,7 +53,7 @@ function genetateListOfNumpagination(allpostsList) {
                 }
                 return [this.slice(0, n)].concat(this.slice(n).chunk(n));
             };
-            var converted_array = array_post_ids.chunk(2);
+            var converted_array = array_post_ids.chunk(6);
             converted_array.forEach(function (item, i) {
                 ++i;
                 var liElement = document.createElement('li');    //generate Li element
@@ -82,11 +82,10 @@ var selectedTab = ''; //temp at start use global variable
 var defaultCategory = '5'; // parent category of BLOG (id)
 //event on click TabFilter of Categories
 jQuery(document).ready(function ($) {
-    $('.blog').on('click','.filter-tabs-tab',function (e) {
-        e.preventDefault();
-        if($(this).hasClass('active-tab'))
-            $(this).removeClass('active-tab');
-            else $(this).addClass('active-tab');
+
+    $('.filter-tabs-tab').css('cursor','pointer');
+    $('.filter-tabs-tab').on('click',function () {
+        $(this).toggleClass('active-tab');
 
         selectedTab = '';
         $('.active-tab').each(function (i) {
@@ -94,8 +93,7 @@ jQuery(document).ready(function ($) {
         selectedTab +=$(this).attr('data-filter');
         });
         if (selectedTab=='') selectedTab = defaultCategory;
-        updateSlug('', selectedTab, url, true);//true - reload list of pagination
-        // $('.pagination-list-item.active-pagination a').click();
+        updateSlug('', selectedTab, url, true, '');//true - reload list of pagination
     })
 
 })
@@ -119,7 +117,7 @@ jQuery(document).ready(function ($) { // get arguments & call ajax method
 
         if(currentNum!==null && url!==null) {
             containerForUpdate.animate({opacity: "0.2" }, 10, "linear");
-            updateSlug(currentNum, currentCategory, url, false);  //call AJAX method, false - notreload list of pagination
+            updateSlug(currentNum, currentCategory, url, false, '');  //call AJAX method, false - notreload list of pagination
         }
         else {
             console.log('Sorry... empty values!');
@@ -129,9 +127,9 @@ jQuery(document).ready(function ($) { // get arguments & call ajax method
 
 });
 //AJAX GET BY JQUERY
-function updateSlug(currentNum, currentCategory, url, reloadPagination) { // AJAX METHOD
+function updateSlug(currentNum, currentCategory, url, reloadPagination, searchString) { // AJAX METHOD
 
-    $.get(url + '?number_pagination=' + currentNum + '&data-filter=' + currentCategory) // send request
+    $.get(url + '?number_pagination=' + currentNum + '&data-filter=' + currentCategory + '&search-filter=' + searchString) // send request
 
         .done(function(data){
             $('.blog-content').css('opacity','0.3');
@@ -146,7 +144,7 @@ function updateSlug(currentNum, currentCategory, url, reloadPagination) { // AJA
             $(document).find('.all-numbers-posts').val($data.find('.all-numbers-posts').val());
             var data_filter = $('.filter-tabs-tab.active-tab').attr('data-filter');
             if(reloadPagination == true) {
-                console.log('in true reload');
+                //console.log('in true reload'); //for debug
                 genetateListOfNumpagination($('.all-numbers-posts').val());
             }
             //$('.active-pagination').removeClass('active-pagination');
@@ -163,7 +161,7 @@ function updateSlug(currentNum, currentCategory, url, reloadPagination) { // AJA
 jQuery(document).ready(function($){
     $('.arrow').css('cursor','pointer');
 
-    $('#pagination-prev').on('click',$('body'),function (){
+    $('#pagination-prev').on('click',function (){
         var activeElement = $('.active-pagination');
         var tempPrev = activeElement.prev('.pagination-list-item');
         if(tempPrev.length) {
@@ -189,21 +187,36 @@ jQuery(document).ready(function($){
     });
 })
 /*------ajax for use search inout -----*/
+/*---use delay-----*/
+function makeDelay(ms) {
+    var timer = 0;
+    return function(callback){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+    };
+};
+var delay = makeDelay(1000);
 jQuery(document).ready(function($){
-    var tempSearchString =[];
 
-    $('#search-input').on('keyup', function(){
-         search_string = $('#search-input').val();
-        console.log(search_string);
-    });
-
-    function ajax_search(){
-       
-console.log(search_string);
-        
-
+    $('#search-button').css('cursor','pointer');
+    $('#search-button').on('click',function () {
+        search_string = $('#search-input').val();
+        ajax_search(search_string);
+        $('#search-input').css('opacity','1');
+    })
+    // $('#search-input').on('change', (function(){
+    $('#search-input').on('search', (function(){
+            search_string = $('#search-input').val();
+            // delay(ajax_search(search_string)); // use when need timeout any time on event
+            ajax_search(search_string);
+            $('#search-input').css('opacity','1');
+        })
+    );
+    function ajax_search(search_string){
+        $('#search-input').css('opacity','0.5');
+    //console.log(search_string);
         if (selectedTab=='') selectedTab = defaultCategory;
-        updateSlug('', defaultCategory, url, false);//true - reload list of pagination
+        updateSlug('', defaultCategory, url, true, search_string);//true - reload list of pagination
     }
-        
+
 })

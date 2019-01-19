@@ -23,7 +23,7 @@ global $mytheme, $post;
         </a>
         <a href="<?= $mytheme['link-conditions']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #2ee3e3, #15c3c3);'>
             <div class="banner-menu-list-item-cont_img">
-                <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/../../../wp-content/themes/Svitanok/inc/urich/img/join.png" alt="">
+                <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/join.png" alt="">
             </div>
             <div class="banner-menu-list-item-text">Умови вступу до школи</div>
         </a>
@@ -50,7 +50,7 @@ global $mytheme, $post;
     </div>
 
 </section>
-<?= do_action('show_last_posts',null,5); ?>
+<?= do_action('show_last_posts','novyny',5); ?>
 
 <section class="about ">
     <div class="about-bg wrapper">
@@ -81,25 +81,10 @@ global $mytheme, $post;
         <div class="info-content-item-button media-button">
             <a href="<?= $mytheme['left-link'] ?>" class="info-content-item-button-link">Подати заявку</a>
         </div>
-        <div class="info-content-item">
-            <div class="info-content-item-article">
-                <div class="info-content-item-article-header"><?= $mytheme['right-head-text'];?>
-                </div>
-                <div class="info-content-item-article-body">
-                    <p class="content-info-text-par"><?= $mytheme['right-content-text'];?></p>
-                </div>
-            </div>
-        </div>
-        <div class="info-content-item-button media-button">
-            <a href="<?= $mytheme['right-link'] ?>" class="info-content-item-button-link">Подати заявку</a>
-        </div>
     </div>
     <div class="info-buttons wrapper">
         <div class="info-content-item-button">
             <a href="<?= $mytheme['left-link'] ?>" class="info-content-item-button-link">Подати заявку</a>
-        </div>
-        <div class="info-content-item-button">
-            <a href="<?= $mytheme['right-link'] ?>" class="info-content-item-button-link">Подати заявку</a>
         </div>
     </div>
 </section>

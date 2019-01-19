@@ -22,7 +22,7 @@ $sorted_array = array_reverse($public_info_list);
     <?php endif; ?>
     <div>
        <?php foreach ($zakupki_list as $item) : ?>
-        <a class="public_info-img-link" href="<?= $item['url'] ?>"><img src="<?= $item['image'] ?>" alt="<?= $item['title'] ?>" title="<?= $item['title'] ?>"></a>
+        <a target="_blank" class="public_info-img-link" href="<?= $item['url'] ?>"><img src="<?= $item['image'] ?>" alt="<?= $item['title'] ?>" title="<?= $item['title'] ?>"></a>
        <?php endforeach; ?>
     </div>
         <?php foreach ($sorted_array as $item): ?>
@@ -35,7 +35,7 @@ $sorted_array = array_reverse($public_info_list);
                 <div class="public_info-content-subheader"><?= $item['public-text'] ?></div><ul  class="public_info-content-list">
             <?php  elseif ($item['head-content']=='disabled'): ?>
 
-                 <li class="public_info-content-list-item"><a href="<?= $item['public-url'] ?>" class="public_info-link"><?= $item['public-text'] ?></a></li>
+                 <li class="public_info-content-list-item"><a target="_blank" href="<?= $item['public-url'] ?>" class="public_info-link"><?= $item['public-text'] ?></a></li>
               <?php endif; endforeach; ?>
 </section>
 <section class="public-content">

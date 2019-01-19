@@ -99,7 +99,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                 array(
                     'id' => '1-section-start',
                     'type' => 'section',
-                    'subtitle' => __('Ліва секція', THEME_OPT),
+                    'subtitle' => __('Контент по центру', THEME_OPT),
                     'indent' => true
                 ),
                 array(
@@ -122,32 +122,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                     'type'   => 'section',
                     'indent' => false,
                 ),
-                array(
-                    'id' => '2-section-start',
-                    'type' => 'section',
-                    'subtitle' => __('Права секція', THEME_OPT),
-                    'indent' => true
-                ),
-                array(
-                    'id'     => 'right-head-text',
-                    'type'   => 'editor',
-                    'title'  => __( 'Заголовок', THEME_OPT)
-                ),
-                array(
-                    'id'     => 'right-content-text',
-                    'type'   => 'editor',
-                    'title'  => __( 'Зміст', THEME_OPT)
-                ),
-                array(
-                    'id'     => 'right-link',
-                    'type'   => 'text',
-                    'title'  => __( 'Посилання', THEME_OPT)
-                ),
-                array(
-                    'id'     => '2-section-end',
-                    'type'   => 'section',
-                    'indent' => false,
-                ),
+
 
             )
         );

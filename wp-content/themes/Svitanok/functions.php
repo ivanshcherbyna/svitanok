@@ -47,8 +47,8 @@ function svitanok_footer_scripts()
 //        wp_enqueue_script('my_common');
         wp_register_script('scripts', get_template_directory_uri() . '/inc/urich/js/scripts.min.js', array('jquery'), '1.0.0',true); // Custom scripts
         wp_enqueue_script('scripts');
-        wp_register_script('custom_script', get_template_directory_uri() . '/inc/urich/js/custom_script.js', array('jquery'), '1.0.0',true); // Custom scripts
-        wp_enqueue_script('custom_script');
+//        wp_register_script('custom_script', get_template_directory_uri() . '/inc/urich/js/custom_script.js', array('jquery'), '1.0.0',true); // Custom scripts
+//        wp_enqueue_script('custom_script');
 
         wp_register_script('async_script',get_template_directory_uri().'/inc/urich/js/async_ajax.js',array('jquery'), '1.0.0',true);
         wp_enqueue_script('async_script');
@@ -302,24 +302,23 @@ remove_filter('the_excerpt', 'wpautop'); // Remove <p> tags from Excerpt altoget
 include_once 'inc/loader.php';
 
 function breadcrumbs($separator = ' » ', $home = 'Головна') {
+ global $post;
+ if($post) {
+     $post_categories = get_the_category($post->ID);
+     // var_dump($post_categories);
+     //last position in breadcrumbs
+     $breadcrumbs_title[] = '<a href="#">' . get_the_title() . '</a>';
+     //first position in breadcrumbs
+     $breadcrumbs = array("</span><a href=\"/\"><span>$home</a></span>");
+     //check blog page from parent category at cat_ID #5
+     if (!empty($post_categories[0]) && ($post_categories[0]->term_id == 5 || $post_categories[0]->category_parent == 5)) {
+         $breadcrumbs[] = '<a href="/blog/">Блог</a>';
+     }
+     $breadcrumbs[] = get_the_title();
 
-	$path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
-	$base_url = ($_SERVER['HTTPS'] ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . '/';
-	$breadcrumbs = array("</span><a href=\"$base_url\"><span>$home</a></span>");
 
-	$last = end( array_keys($path) );
-
-	foreach( $path as $x => $crumb ){
-		$title = ucwords(str_replace(array('.php', '_'), Array('', ' '), $crumb));
-		if( $x != $last ){
-			$breadcrumbs[] = '<a href="'.$base_url.$crumb.'">'.$title.'</a>';
-		}
-		else {
-			$breadcrumbs[] = get_the_title();
-		}
-	}
-
-	return implode( $separator, $breadcrumbs );
+     return implode($separator, $breadcrumbs);
+ }
 }
 add_action('show_last_posts','get_my_last_posts',10,2);
 
@@ -328,12 +327,13 @@ function get_my_last_posts($category_slug=null, $numbers=-1)
     {
         $args = array(
             'orderby' => 'date',
-            'order' => 'ASC',
+            'order' => 'DESC',
             'numberposts' => $numbers,
             'category_name' => $category_slug,
             'post_status' => 'publish',
             'post_type' => array('post')
         );
+
         $posts = get_posts($args);
         if($posts) {
             echo '<section class="news">';
@@ -348,18 +348,21 @@ function get_my_last_posts($category_slug=null, $numbers=-1)
     }
 
     function show_posts_html($posts){
-    setlocale(LC_TIME, "uk_UA.UTF8");
-        $array_week= array('понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота','неділя');
-        $array_month= array('січня', 'лютого', 'березня', 'квітня', 'травня',  'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня');
+    //setlocale(LC_TIME, "uk_UA.UTF8");
+        $array_week= array(null, 'понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота','неділя');
+        $array_month= array(null,'січня', 'лютого', 'березня', 'квітня', 'травня',  'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня');
 
         foreach ($posts as $post) :
 
             setup_postdata($post);
-            $content = $post->post_content;
+            $content = sanitize_text_field($post->post_content);
+
             $post_author_id = $post->post_author;
-            $post_author = get_the_author_meta( 'display_name' , $post_author_id );
-            $part_content = substr($content,0,514); // only 150 symbols of post content preview
+            //$post_author = get_the_author_meta( 'display_name' , $post_author_id );
+            $part_content = mb_substr($content,0,514); // only 150 symbols of post content preview
+
             $part_content = $part_content.'...';
+
             $link =get_permalink($post->ID);
             $post_date_string=$post->post_date; //string format in db 2018-07-25 12:31:08
             $post_date = new DateTime($post_date_string);
@@ -380,7 +383,7 @@ function get_my_last_posts($category_slug=null, $numbers=-1)
                             <h3 class="news-content-info-text-head">
                                 <span><?= $title ?></span>
                             <span class="news-content-info-text-date"><?= $current_post_day.' '.$current_post_month.', '.$current_post_week_day ?></span>
-                            <p class="content-info-text-par"><?= $part_content ?></p>
+                            <p class="content-info-text-par"><?= $part_content; ?></p>
                             <a class="content-info-text-link" href="<?= $link ?>">Читати повністю &rarr; </a>
                         </div>
                     </div>
@@ -410,7 +413,7 @@ function get_same_posts($category, $exclude_post_id, $category_slug=null, $numbe
 }
 add_action('show_same_posts','get_same_posts',10,4);
 
-function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclude_post_id=null, $searched_string=null)
+function get_blog_posts($category_ids, $numbers=6,$blog_categories_ids, $searched_string=null, $exclude_post_id=null)
 {
     $all_posts_args=array(
         'orderby' => 'date',
@@ -421,6 +424,9 @@ function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclud
         'fields'          => 'ids',
         'post_type' => array('post'),
     );
+    if($searched_string) {
+        $all_posts_args['s'] = $searched_string;
+    }
     $all_post_ids=get_posts($all_posts_args);
     $string_all_post_ids=implode( "," ,$all_post_ids);
 
@@ -434,44 +440,30 @@ function get_blog_posts($category_ids, $numbers=12,$blog_categories_ids, $exclud
     );
 
     $pagination =  $numbers; //if set current pagination
-    $numberposts = empty($pagination)? 12: null; // if not set current pagination (show last 6 posts) for start page
+    $numberposts = empty($pagination)? 6: null; // if not set current pagination (show last 6 posts) for start page
 
     $args['include']=$pagination;
     $args['numberposts']=$numberposts;
-/*-----from search use -------*/ 
-        // $all_blog_posts = get_posts(array(
-        //     'numberposts' => -1,
-        //     'category_name' => $category_slug,
-        //     'post_status' => 'publish',))
+    if($searched_string) {
+        $args['s'] = $searched_string;
+    }
 
-        //$searched_post_ids ='';
-        // if($searched_string!=null){
-        //     $searched_string = sanitize_text_field( $searched_string );
-        //     foreach ($variable as $key => $value) {
-        //         # code...
-        //     }
-        // }
-/*-------------*/
+
     $posts = get_posts($args);
 
-    echo '<input type="hidden" class="all-numbers-posts hidden" value="'.$string_all_post_ids.'" data="'.get_permalink().'"/>';
+    if(is_archive()){
+        // if this function work in archive page template
+        $obj_id = get_queried_object_id();
+        $current_url = get_term_link($obj_id);
+        echo '<input type="hidden" class="all-numbers-posts hidden" value="'.$string_all_post_ids.'" data="'.$current_url.'"/>';
+    }
+    else{
+        //default some page template
+        echo '<input type="hidden" class="all-numbers-posts hidden" value="'.$string_all_post_ids.'" data="'.get_permalink().'"/>';
+    }
     if($posts) {
         show_same_posts_html($posts);
     }
-   /*-------------end---------------------*/
-//    $args = array(
-//        'orderby' => 'date',
-//        'order' => 'ASC',
-//        'numberposts' => $numbers,
-//        'category' => $category,
-//        'category_name' => $category_slug,
-//        'exclude' => $exclude_post_id,
-//        'post_status' => 'publish',
-//        'post_type' => array('post')
-//
-//    );
-//    $posts = get_posts($args);
-
 }
 add_action('show_blog_posts','get_blog_posts',10,4);
 //use for add_action to generate html content
@@ -495,10 +487,9 @@ function show_same_posts_html($posts){
         $part_content= substr($content,0,150); // only 150 symbols of post content preview
         $post_date_string=$post->post_date; //string format in db 2018-07-25 12:31:08
         $post_date = new DateTime($post_date_string);
-        $formatted_post_date = $post_date->format(date("n.j.Y")); // object format 6.02.1999
+        $formatted_post_date = date_format($post_date, 'j.n.Y'); // object format 6.02.1999
         $title = get_the_title($post);
         $image=get_the_post_thumbnail_url($post, 'full');
-
         ?>
         <a class="blog-content-item" data-category="<?= $post_cat ?>" href="<?= $link ?>">
                 <div class="blog-content-item-info">
@@ -548,7 +539,10 @@ function get_my_blog($category_slug, $number_pagination=null)
 
 
     $posts = get_posts($args);
+
     echo '<input type="hidden" class="all-numbers-posts hidden" value="'.implode( "," ,$all_post_ids).'" data="'.get_permalink().'"/>';
+
+
         foreach ($posts as $post) :
 
     setup_postdata($post);

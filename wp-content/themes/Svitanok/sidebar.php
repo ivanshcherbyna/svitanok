@@ -1,7 +1,7 @@
 <!-- sidebar -->
 
 
-<?php global $mytheme, $post;
+<?php global $mytheme, $post; 
 $category = $post->post_category;
 if(is_array($category)) {
     arsort($category);
@@ -9,10 +9,11 @@ if(is_array($category)) {
 }
 $exclude_post_id = $post->ID;
 
-$share_social_gl = !empty(get_post_meta($post->ID,'google_plus_count',true))?get_post_meta($post->ID,'google_plus_count',true) : 0;
+$share_social_gl = !empty(get_post_meta(get_queried_object_id(),'google_plus_count',true))?get_post_meta($post->ID,'google_plus_count',true) : 0;
 $share_social_fb = !empty(get_post_meta($post->ID,'facebook_count',true))?get_post_meta($post->ID,'facebook_count',true) : 0;
 $share_social_tw = !empty(get_post_meta($post->ID,'twitter_count',true))?get_post_meta($post->ID,'twitter_count',true) : 0;
 echo '<input id="post_id_num" type="hidden" value="'.$post->ID.'"/>';
+
 ?>
 
 <div class="blog_article-sidebar">
@@ -23,7 +24,7 @@ echo '<input id="post_id_num" type="hidden" value="'.$post->ID.'"/>';
             <div class="blog_article-sidebar-social-item-num"><?= $share_social_gl ?></div>
         </div>
         <div class="blog_article-sidebar-social-item">
-            <a id="share_btn_fb" href="https://www.facebook.com/sharer/sharer.php?u='<?= get_permalink()?>" class="blog_article-sidebar-social-item-link" title="Share on Facebook" target="_blank"><img src="../../../wp-content/themes/Svitanok/inc/urich/img/shape.png" alt="#"></a>
+            <a id="share_btn_fb" href="https://www.facebook.com/sharer?u=<?= get_permalink()?>" class="blog_article-sidebar-social-item-link" title="Share on Facebook" target="_blank"><img src="../../../wp-content/themes/Svitanok/inc/urich/img/shape.png" alt="#"></a>
             <div class="blog_article-sidebar-social-item-num"><?= $share_social_fb ?></div>
         </div>
         <div class="blog_article-sidebar-social-item">

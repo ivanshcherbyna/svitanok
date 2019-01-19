@@ -3,7 +3,8 @@
 <!-- main content goes here -->
 <main role="main">
 	<!-- section -->
-	<section>
+    <section class="library">
+
 
 
 	<?php if (have_posts()): while (have_posts()) : the_post(); ?>

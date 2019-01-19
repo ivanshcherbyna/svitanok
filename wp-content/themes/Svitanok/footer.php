@@ -9,7 +9,7 @@
                     <?= $mytheme['footer-text']?>
                 </div>
                 <div class="footer-item footer-designed_by">
-                    <img src="../../../wp-content/themes/Svitanok/inc/urich/img/u-rich-logo-white.png" alt="#">
+                    <a href="https://urich.org/" ><img src="../../../wp-content/themes/Svitanok/inc/urich/img/u-rich-logo-white.png" alt="#"></a>
                 </div>
             </footer>
 			<!-- /footer footer-bg -->
