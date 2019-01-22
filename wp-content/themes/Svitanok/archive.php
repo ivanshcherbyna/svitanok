@@ -4,11 +4,13 @@
 
 <?php
 global $post, $wp_query;
-$post_categories = get_the_category($post->ID);
+//$post_categories = get_the_category($post->ID); //use if template use for some post
 
 $blog_categories_ids = $wp_query->queried_object->cat_ID;
 $number_posts=(isset($_GET['number_pagination']))? $_GET['number_pagination']:null;
 $selected_category=$wp_query->queried_object->cat_ID;
+$category = get_category($selected_category);
+$count_of_category_posts = $category->category_count;
 $search_filter=(isset($_GET['search-filter']))? $_GET['search-filter']:null;
 $iterator = 0;
 
@@ -22,7 +24,9 @@ $iterator = 0;
         </div>
     </div>
     <div class="blog-content">
-        <?php do_action('show_blog_posts', $selected_category, $number_posts, $blog_categories_ids,$search_filter); ?>
+        <?php if($count_of_category_posts == null) _e('Вибачте, немає публікацій для відображення.',THEME_OPT);
+        else do_action('show_blog_posts', $selected_category, $number_posts, $blog_categories_ids,$search_filter);
+        ?>
     </div>
 </section>
 

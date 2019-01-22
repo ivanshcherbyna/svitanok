@@ -18,30 +18,62 @@
 }
 
 .wpsisac-slick-slider.design-2 .slick-next{
-    right: 15% !important;
-
+    right: 5% !important;
 }
 .wpsisac-slick-slider.design-2 .slick-prev {
-    left: 15% !important;
+    left: 5% !important;
 }
 .wpsisac-slick-slider button.slick-arrow {
     width: 60px;
     height: 60px;
 }
-@media (max-width: 1200px){
+/* @media (max-width: 1200px){
     .wpsisac-slick-slider.design-2 .slick-next{
         right: 5% !important;
     }
     .wpsisac-slick-slider.design-2 .slick-prev {
         left: 5% !important;
     }
-}
+} */
 @media (max-width: 768px){
     .wpsisac-slick-slider.design-2 .slick-next{
-        top: 70% !important;
+        top: 76% !important;
     }
     .wpsisac-slick-slider.design-2 .slick-prev {
-        top: 70% !important;
+        top: 76% !important;
     }
 }
+.wpsisac-slick-slider.design-2 .slick-image-slide img{
+	max-height: 600px;
+}
 /* ------------------------------------------*/
+/*----fix----*/
+.educators-main-img img {
+    max-width: 170px;
+    max-height: 180px;
+    border-radius: 9px;
+}
+.educators-main .educators-content {
+    display: flex;
+    justify-content: center;
+	width: 100%;
+}
+.educators-main .educators-info {
+    width: 300px;
+}
+.educators-main img{
+	max-width: 280px;
+    max-height: 300px;
+}
+.educators-info-text {
+	width: 90%;
+}
+.team-divider {
+    margin: 20px;
+}
+.banner > .wpsisac-slick-slider-wrp.wpsisac-clearfix .slick-slider .slick-track{
+    background: #0487C9;
+}
+.wpsisac-slick-slider.design-2 .slick-image-slide .slide-wrap .slider-overlay {
+    background-color: transparent;
+}

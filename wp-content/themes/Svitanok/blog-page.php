@@ -8,7 +8,7 @@
 
 <?php
 global $post;
-$post_categories = get_the_category($post->ID);
+//$post_categories = get_the_category($post->ID);
 $categories_array = get_categories(array(
     'type'         => 'post',
     'child_of'     => 5,

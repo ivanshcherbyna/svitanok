@@ -6,7 +6,7 @@
 ?>
 <?php get_header(); ?>
  <?php global $mytheme, $post;
- $array_month= array('січня', 'лютого', 'березня', 'квітня', 'травня',  'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня');
+ $array_month= array(null,'січня', 'лютого', 'березня', 'квітня', 'травня',  'червня', 'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня');
  $post_date_string = $post->post_date;
  $post_date_prepare = new DateTime($post_date_string);
  $month = $post_date_prepare->format('n');

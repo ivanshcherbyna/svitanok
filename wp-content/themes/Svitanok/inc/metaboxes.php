@@ -21,7 +21,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
 				'id'     => 'slick-slider-meta',
                 'title'       => __('Слайдер ',THEME_OPT),
 				'type'   => 'text',
-				'description'  => __( 'Шорткод слайдеру')
+				'description'  => __( 'Шорткод слайдеру', THEME_OPT)
 			)
 		)
 	);
@@ -33,31 +33,31 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                 array(
                     'id'     => 'link-department',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку органи самоврядування'),
+                    'description'  => __( 'посилання на сторінку органи самоврядування', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
                     'id'     => 'link-conditions',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку умови вступу до школи'),
+                    'description'  => __( 'посилання на сторінку умови вступу до школи', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
-                    'id'     => 'link-rewards',
+                    'id'     => 'link-library',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку наші досягнення'),
+                    'description'  => __( 'посилання на сторінку бібліотека', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
                     'id'     => 'link-video',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку відеотека школи'),
+                    'description'  => __( 'посилання на сторінку відеотека школи', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
                     'id'     => 'link-for-parent',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку рекомендації батькам'),
+                    'description'  => __( 'посилання на сторінку рекомендації батькам', THEME_OPT),
                     'default' => '/'
                 ),
 
@@ -68,65 +68,46 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
             'icon_class'    => 'icon-large',
             'icon'          => 'el-icon-list-alt',
             'fields' => array(
-                array(
-                    'id'     => 'front-secont-string-head',
-                    'type'   => 'text',
-                    'description'  => __( 'Залоговок')
+				array(
+                    'id'     => 'info-front-image-1',
+                    'type'   => 'media',
+                    'title'  => __( 'Зображення інфо 1',THEME_OPT)
                 ),
-                array(
+				array(
+                    'id'     => 'info-front-image-2',
+                    'type'   => 'media',
+                    'title'  => __( 'Зображення інфо 2',THEME_OPT)
+                ),
+				array(
+                    'id'     => 'info-front-image-3',
+                    'type'   => 'media',
+                    'title'  => __( 'Зображення інфо 3',THEME_OPT)
+                ),
+				array(
+                    'id'     => 'info-front-image-4',
+                    'type'   => 'media',
+                    'title'  => __( 'Зображення інфо 4',THEME_OPT)
+                ),
+				
+               array(
+                    'id'     => 'front-image-1',
+                    'type'   => 'media',
+                    'title'  => __( 'Зображення відгук перший',THEME_OPT)
+                ),
+				array(
                     'id'     => 'front-image',
                     'type'   => 'media',
-                    'title'  => __( 'Зображення',THEME_OPT)
-                ),
-                array(
-                    'id'     => 'front-content',
-                    'type'   => 'editor',
-                    'title'  => __( 'Зміст')
-                ),
-                array(
-                    'id'     => 'link-front',
-                    'type'   => 'text',
-                    'title'  => __( 'посилання')
-                ),
-
-            )
+                    'title'  => __( 'Зображення відгук другий',THEME_OPT)
+                ),  
+               array(
+                        'id'     => 'front-image-2',
+                        'type'   => 'media',
+                        'title'  => __( 'Зображення відгук Третій',THEME_OPT)
+                    ),
+                )
         );
-        $homepage_fields4 = array(
-            'title' => 'Хто може стати нашим учнем',
-            'icon_class'    => 'icon-large',
-            'icon'          => 'el-icon-list-alt',
-            'fields' => array(
-                array(
-                    'id' => '1-section-start',
-                    'type' => 'section',
-                    'subtitle' => __('Контент по центру', THEME_OPT),
-                    'indent' => true
-                ),
-                array(
-                    'id'     => 'left-head-text',
-                    'type'   => 'editor',
-                    'title'  => __( 'Заголовок', THEME_OPT)
-                ),
-                array(
-                    'id'     => 'left-content-text',
-                    'type'   => 'editor',
-                    'title'  => __( 'Зміст', THEME_OPT)
-                ),
-                array(
-                    'id'     => 'left-link',
-                    'type'   => 'text',
-                    'title'  => __( 'Посилання', THEME_OPT)
-                ),
-                array(
-                    'id'     => '1-section-end',
-                    'type'   => 'section',
-                    'indent' => false,
-                ),
-
-
-            )
-        );
-        $homepage_fields5 = array(
+        
+       /* $homepage_fields3 = array(
             'title' => 'Мапа',
             'icon_class'    => 'icon-large',
             'icon'          => 'el-icon-list-alt',
@@ -143,13 +124,12 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                     'title'  => __( 'Телефон та інше', THEME_OPT)
                 )
             )
-        );
+        );*/
 
 
 	$homepage_options[] = $homepage_fields1;
 	$homepage_options[] = $homepage_fields2;
 	$homepage_options[] = $homepage_fields3;
-	$homepage_options[] = $homepage_fields4;
 
 	//page team
     $the_team_options = array();
