@@ -450,7 +450,7 @@ function get_blog_posts($category_ids, $numbers=6,$blog_categories_ids, $searche
 
 
     $posts = get_posts($args);
-
+    
     if(is_archive()){
         // if this function work in archive page template
         $obj_id = get_queried_object_id();
@@ -464,9 +464,12 @@ function get_blog_posts($category_ids, $numbers=6,$blog_categories_ids, $searche
     if($posts) {
         show_same_posts_html($posts);
     }
+    
 }
 add_action('show_blog_posts','get_blog_posts',10,4);
+
 //use for add_action to generate html content
+add_action('show_posts-pages', 'show_same_posts_html');
 function show_same_posts_html($posts){
 
     foreach ($posts as $post) :

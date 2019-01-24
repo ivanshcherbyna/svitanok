@@ -55,7 +55,7 @@ $category_link = get_category_link( $news_cat_id );
 
 <section class="info-block ">
 		<div class="info-block-list wrapper">
-            <?php if (is_array($mytheme['front-slides-list'])): foreach ($mytheme['front-slides-list'] as $item): if (!empty($item['image'])): ?>
+            <?php if (is_array($mytheme['front-linked-list'])): foreach ($mytheme['front-linked-list'] as $item): if (!empty($item['image'])): ?>
 
 			<a class="info-block-list-item" href="<?= $item['url'] ?>">
 				<div class="info-block-list-item-img" style="background: url(<?= $item['image'] ?>)"></div>
