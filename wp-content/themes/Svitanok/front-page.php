@@ -21,7 +21,7 @@ $category_link = get_category_link( $news_cat_id );
             <div class="banner-menu-list-item-cont_img">
                 <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/selfgovern.png" alt="">
             </div>
-            <div class="banner-menu-list-item-text">Органи самовря<wbr>дування</div>
+            <div class="banner-menu-list-item-text">Спеціальна освіта</div>
         </a>
         <a href="<?= $mytheme['link-conditions']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #2ee3e3, #15c3c3);'>
             <div class="banner-menu-list-item-cont_img">
@@ -29,25 +29,25 @@ $category_link = get_category_link( $news_cat_id );
             </div>
             <div class="banner-menu-list-item-text">Умови вступу до школи</div>
         </a>
-        <a href="<?= $mytheme['link-library']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #f0d42b, #ddaa13)'>
+        <a href="<?= $mytheme['link-for-parent']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #f0d42b, #ddaa13)'>
+            <div class="banner-menu-list-item-cont_img">
+                <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/parents.png" alt="">
+            </div>
+            <div class="banner-menu-list-item-text">Рекомендації батькам</div>
+        </a>
+        <a href="<?= $mytheme['link-library']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #9692f3, #5d59e3)'>
             <div class="banner-menu-list-item-cont_img">
                 <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/victories.png" alt="">
             </div>
             <div class="banner-menu-list-item-text">Наша бібліотека
             </div>
         </a>
-        <a href="<?= $mytheme['link-video']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #9692f3, #5d59e3)'>
+        <a href="<?= $mytheme['link-video']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #cc44d6, #9d20ad)'>
             <div class="banner-menu-list-item-cont_img">
                 <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/video.png" alt="">
             </div>
-            <div class="banner-menu-list-item-text">Відеотека школи
+            <div class="banner-menu-list-item-text">Інфраструктура
             </div>
-        </a>
-        <a href="<?= $mytheme['link-for-parent']?>" class="banner-menu-list-item" style='background: linear-gradient(to bottom, #cc44d6, #9d20ad)'>
-            <div class="banner-menu-list-item-cont_img">
-                <img class="banner-menu-list-item-img" src="../../../wp-content/themes/Svitanok/inc/urich/img/parents.png" alt="">
-            </div>
-            <div class="banner-menu-list-item-text">Рекомендації батькам</div>
         </a>
     </div>
 
@@ -55,22 +55,14 @@ $category_link = get_category_link( $news_cat_id );
 
 <section class="info-block ">
 		<div class="info-block-list wrapper">
-			<a class="info-block-list-item" href="#">
-				<div class="info-block-list-item-img" style="background: url(<?= $mytheme['info-front-image-1']['url'] ?>)"></div>
-				<span class="info-block-list-item-text">Початкова школа (1-4 кл)</span>
+            <?php if (is_array($mytheme['front-slides-list'])): foreach ($mytheme['front-slides-list'] as $item): if (!empty($item['image'])): ?>
+
+			<a class="info-block-list-item" href="<?= $item['url'] ?>">
+				<div class="info-block-list-item-img" style="background: url(<?= $item['image'] ?>)"></div>
+				<span class="info-block-list-item-text"><?= $item['title'] ?></span>
 			</a>
-			<a class="info-block-list-item" href="#">
-				<div class="info-block-list-item-img" style="background: url(<?= $mytheme['info-front-image-2']['url'] ?>)"></div>
-				<span class="info-block-list-item-text">Середня школа (5-9 кл)</span>
-			</a>
-			<a class="info-block-list-item" href="#">
-				<div class="info-block-list-item-img" style="background: url(<?= $mytheme['info-front-image-3']['url'] ?>)"></div>
-				<span class="info-block-list-item-text">Гуртки</span>
-			</a>
-			<a class="info-block-list-item" href="http://www.int-svitanok.zp.ua/orhany-samovryaduvannya/">
-				<div class="info-block-list-item-img" style="background: url(<?= $mytheme['info-front-image-4']['url'] ?>)"></div>
-				<span class="info-block-list-item-text">Самоврядування</span>
-			</a>
+
+            <?php endif; endforeach; endif; ?>
 		</div>
 	</section>
 

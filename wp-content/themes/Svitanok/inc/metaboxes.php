@@ -33,7 +33,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                 array(
                     'id'     => 'link-department',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку органи самоврядування', THEME_OPT),
+                    'description'  => __( 'посилання на сторінку спеціальна освіта', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
@@ -51,7 +51,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
                 array(
                     'id'     => 'link-video',
                     'type'   => 'text',
-                    'description'  => __( 'посилання на сторінку відеотека школи', THEME_OPT),
+                    'description'  => __( 'посилання на сторінку інфраструктура', THEME_OPT),
                     'default' => '/'
                 ),
                 array(
@@ -68,43 +68,48 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
             'icon_class'    => 'icon-large',
             'icon'          => 'el-icon-list-alt',
             'fields' => array(
-				array(
-                    'id'     => 'info-front-image-1',
-                    'type'   => 'media',
-                    'title'  => __( 'Зображення інфо 1',THEME_OPT)
+                array(
+                    'title'=>__('Сектор після слайдеру', THEME_OPT ),
+                    'id' => 'front-slides-list',
+                    'type' => 'slides',
+                    'subtitle'    => __( 'Завантаження інформації, посилання із зображеннями.', THEME_OPT ),
+                    'placeholder' => array(
+                        'title'       => __( 'Пояснення', THEME_OPT ),
+                        'description' => __( 'Не потребує заповнення', THEME_OPT ),
+                        'url'         => __( 'Посилання URL', THEME_OPT ),
+                    )
                 ),
-				array(
-                    'id'     => 'info-front-image-2',
-                    'type'   => 'media',
-                    'title'  => __( 'Зображення інфо 2',THEME_OPT)
-                ),
-				array(
-                    'id'     => 'info-front-image-3',
-                    'type'   => 'media',
-                    'title'  => __( 'Зображення інфо 3',THEME_OPT)
-                ),
-				array(
-                    'id'     => 'info-front-image-4',
-                    'type'   => 'media',
-                    'title'  => __( 'Зображення інфо 4',THEME_OPT)
-                ),
-				
                array(
                     'id'     => 'front-image-1',
                     'type'   => 'media',
                     'title'  => __( 'Зображення відгук перший',THEME_OPT)
                 ),
+                array(
+                    'id'     => 'contennt-for-front-image-1',
+                    'type'   => 'editor',
+                    'title'  => __( 'відгук перший',THEME_OPT)
+                ),
 				array(
                     'id'     => 'front-image',
                     'type'   => 'media',
                     'title'  => __( 'Зображення відгук другий',THEME_OPT)
-                ),  
+                ),
+                array(
+                    'id'     => 'contennt-for-front-image',
+                    'type'   => 'editor',
+                    'title'  => __( 'відгук другий',THEME_OPT)
+                ),
                array(
                         'id'     => 'front-image-2',
                         'type'   => 'media',
-                        'title'  => __( 'Зображення відгук Третій',THEME_OPT)
+                        'title'  => __( 'Зображення відгук третій',THEME_OPT)
                     ),
-                )
+                array(
+                    'id'     => 'contennt-for-front-image-2',
+                    'type'   => 'editor',
+                    'title'  => __( 'відгук третій',THEME_OPT)
+                ),
+            )
         );
         
        /* $homepage_fields3 = array(
@@ -386,7 +391,7 @@ if ( !function_exists( "redux_add_metaboxes" ) ):
 
                 array(
                     'title'=>__('Держакупівлі тощо', THEME_OPT ),
-                    'id' => 'public-slides-list',
+                    'id' => 'front-slides-list',
                     'type' => 'slides',
                     'subtitle'    => __( 'Завантаження інформації із зображеннями.', THEME_OPT ),
                     'placeholder' => array(
